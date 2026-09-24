@@ -134,7 +134,7 @@ ae_get_url(const AppleEvent *evt, AppleEvent *reply, long refcon)
 
 #pragma unused(reply, refcon)
 
-	err = AEGetParamDesc(evt, keyDirectObject,
+	err = AEGetParamDesc((AppleEvent *)evt, keyDirectObject,
 	    typeChar, &url_desc);
 	if (err != noErr)
 		return err;
