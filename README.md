@@ -135,6 +135,8 @@ mkdir Retro68-build && cd Retro68-build
 bash ../Retro68/build-toolchain.bash --no-ppc --no-carbon --prefix=$(pwd)/toolchain
 ```
 
+On Debian/Ubuntu, `./scripts/setup-toolchain.sh` does all of this, including installing the build dependencies.
+
 Then build Flynn:
 
 ```bash
