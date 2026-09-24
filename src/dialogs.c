@@ -38,7 +38,7 @@
 extern FlynnPrefs prefs;
 extern Session *active_session;
 
-/* Status window dimensions (centered on 512x342 screen) */
+/* Status window dimensions (centered on the main screen) */
 #define STATUS_WIN_W   320
 #define STATUS_WIN_H    40
 
@@ -135,11 +135,18 @@ conn_status_show(const char *msg)
 	Str255 ps;
 	short len;
 
-	SetRect(&r,
-	    (512 - STATUS_WIN_W) / 2,
-	    (342 - STATUS_WIN_H) / 2 + 20,  /* +20 for menu bar */
-	    (512 + STATUS_WIN_W) / 2,
-	    (342 + STATUS_WIN_H) / 2 + 20);
+	/* Center on the main screen below the menu bar (any screen size) */
+	{
+		Rect scr = qd.screenBits.bounds;
+		short mbar = GetMBarHeight();
+		short left = scr.left +
+		    (scr.right - scr.left - STATUS_WIN_W) / 2;
+		short top = scr.top + mbar +
+		    (scr.bottom - scr.top - mbar - STATUS_WIN_H) / 2;
+
+		SetRect(&r, left, top, left + STATUS_WIN_W,
+		    top + STATUS_WIN_H);
+	}
 	title[0] = 0;
 	w = NewWindow(0L, &r, title, true, dBoxProc,
 	    (WindowPtr)-1L, false, 0L);

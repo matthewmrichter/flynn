@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+- Connecting/Resolving status window was positioned for a 512x342 screen, so it sat off-center on larger displays; it is now centered on the actual main screen below the menu bar (both)
+
 ## [1.10.2] - 2026-07-23
 
 ### Fixed
